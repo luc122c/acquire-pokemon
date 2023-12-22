@@ -32,9 +32,9 @@ export const fetchPokemonSpecies = (
  * Checks the cache first, and if it's not there, fetches it from the API.
  **/
 export const getPokemonByName = async (name: PokemonSpecies["name"]) => {
-  if (await localStorage.hasItem(name)) {
-    return await localStorage.getItem<PokemonSpecies>(name);
-  } else {
+  const pokemon = await localStorage.getItem<PokemonSpecies>(name);
+  if (pokemon) return pokemon;
+  else {
     const data = await fetchPokemonSpecies(name);
     await localStorage.setItem(name, data);
     return data;
