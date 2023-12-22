@@ -3,23 +3,29 @@ import "./style.css";
 
 import { PromisePool } from "@supercharge/promise-pool";
 import { fetchPokemonSpeciesList, getPokemonByName } from "./fetch";
+import { pokemonCard } from "./rendering";
+
+const app = document.querySelector<HTMLDivElement>("#app")!;
+
+app.innerText = "Loading...";
 
 // Get the initial list of pokemon species
-const results = () =>
-  fetchPokemonSpeciesList(1)
-    .then((pokemon_species) =>
-      // Use a promise pool to limit the number of concurrent requests
-      PromisePool.withConcurrency(10)
-        .for(pokemon_species)
-        .process((species) => getPokemonByName(species.name))
-    )
-    .then(({ results, errors }) => results);
+fetchPokemonSpeciesList(1)
+  .then((pokemon_species) =>
+    // Use a promise pool to limit the number of concurrent requests
+    PromisePool.withConcurrency(10)
+      .for(pokemon_species)
+      .process((species) => getPokemonByName(species.name))
+  )
+  .then(({ results, errors }) => {
+    // Clear the div
+    app.innerHTML = "";
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div>
-    <pre>
-      ${JSON.stringify(results, null, 2)}
-    </pre>
-    <p>Count: ${results.length}</p>
-  </div>
-`;
+    // Render the pokemon cards to the screen
+    results
+      .sort((a, b) => a.id - b.id)
+      .forEach((pokemon) => {
+        const card = pokemonCard(pokemon);
+        app.appendChild(card);
+      });
+  });
