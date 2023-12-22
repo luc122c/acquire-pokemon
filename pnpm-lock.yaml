@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 devDependencies:
+  '@supercharge/promise-pool':
+    specifier: ^3.1.0
+    version: 3.1.0
   ofetch:
     specifier: ^1.3.3
     version: 1.3.3
@@ -485,6 +488,11 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@supercharge/promise-pool@3.1.0:
+    resolution: {integrity: sha512-gB3NukbIcYzRtPoE6dx9svQYPodxvnfQlaaQd8N/z87E6WaMfRE7o5HwB+LZ+KeM0nsNAq1n4TmBtfz1VCUR+Q==}
+    engines: {node: '>=8'}
+    dev: true
 
   /acorn@8.11.2:
     resolution: {integrity: sha512-nc0Axzp/0FILLEVsm4fNwLCwMttvhEI263QtVPQcbpfZZ3ts0hLsZGOpE6czNlid7CJ9MlyH8reXkpsf3YUY4w==}
