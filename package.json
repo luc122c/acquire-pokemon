@@ -3,6 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://acquire-pokemon.pages.dev/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luc122c/acquire-pokemon.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
