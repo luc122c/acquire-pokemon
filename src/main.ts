@@ -17,7 +17,7 @@ fetchPokemonSpeciesList(1)
       .for(pokemon_species)
       .process((species) => getPokemonByName(species.name))
   )
-  .then(({ results, errors }) => {
+  .then(({ results }) => {
     // Clear the div
     app.innerHTML = "";
 
