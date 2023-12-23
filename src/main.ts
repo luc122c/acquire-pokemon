@@ -18,14 +18,18 @@ fetchPokemonSpeciesList(1)
       .process((species) => getPokemonByName(species.name))
   )
   .then(({ results }) => {
-    // Clear the div
-    app.innerHTML = "";
+    const grid = document.createElement("div");
+    grid.classList.add("card-grid");
 
     // Render the pokemon cards to the screen
     results
       .sort((a, b) => a.id - b.id)
       .forEach((pokemon) => {
         const card = pokemonCard(pokemon);
-        app.appendChild(card);
+        grid.appendChild(card);
       });
+
+    // Clear the div
+    app.innerHTML = "";
+    app.appendChild(grid);
   });
