@@ -6,6 +6,20 @@
     <title>Acquire Pokémon</title>
   </head>
   <body>
+    <header>
+      <h1>Acquire Pokémon</h1>
+
+      <form id="search" method="GET">
+        <input
+          type="text"
+          name="search"
+          placeholder="Search for a Pokémon"
+          tabindex="1"
+        />
+        <button tabindex="1" type="submit">Search</button>
+        <button tabindex="1" id="clear-search">Clear</button>
+      </form>
+    </header>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
