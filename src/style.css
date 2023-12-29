@@ -21,6 +21,11 @@ body {
 header {
   margin: 1rem;
 }
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
 
 #search {
   display: flex;
@@ -30,24 +35,21 @@ header {
   padding: 0.5rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: #333333;
-  color: #ffffff;
+  background-color: #333;
   outline: none;
 }
 #search > input:focus {
-  background-color: #444444;
+  background-color: #444;
 }
 #search > button {
+  border-radius: 0.5rem;
+  background-color: #333;
   cursor: pointer;
   padding: 0.5rem;
+  margin-left: 0.25rem;
 }
 #search > button:focus {
   outline: solid 1px #646cff;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
 }
 
 .card-grid {
