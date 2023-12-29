@@ -40,3 +40,15 @@ export const getPokemonByName = async (name: PokemonSpecies["name"]) => {
     return data;
   }
 };
+
+export function filterPokemonSpecies(
+  array: PokemonSpecies[],
+  search: ReturnType<typeof URLSearchParams.prototype.get>
+) {
+  if (!search) return array;
+
+  // Filter names and ids by the search term
+  return array.filter(
+    ({ name, id }) => name.includes(search) || id.toString() == search
+  );
+}

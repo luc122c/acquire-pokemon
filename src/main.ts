@@ -2,11 +2,14 @@ import "the-new-css-reset/css/reset.css";
 import "./style.css";
 
 import { PromisePool } from "@supercharge/promise-pool";
-import { fetchPokemonSpeciesList, getPokemonByName } from "./fetch";
+import {
+  fetchPokemonSpeciesList,
+  getPokemonByName,
+  filterPokemonSpecies,
+} from "./fetch";
 import { pokemonCard } from "./rendering";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
-
 app.innerText = "Loading...";
 
 setupClearFormButton();
@@ -21,15 +24,7 @@ fetchPokemonSpeciesList(1)
       .for(pokemon_species)
       .process((species) => getPokemonByName(species.name))
   )
-  .then(({ results }) => {
-    if (search) {
-      // Filter names and ids by the search term
-      return results.filter(
-        (pokemon) =>
-          pokemon.name.includes(search) || pokemon.id.toString() == search
-      );
-    } else return results;
-  })
+  .then(({ results }) => filterPokemonSpecies(results, search))
   .then((results) => {
     const grid = document.createElement("div");
     grid.classList.add("card-grid");
@@ -38,8 +33,7 @@ fetchPokemonSpeciesList(1)
     results
       .sort((a, b) => a.id - b.id)
       .forEach((pokemon) => {
-        const card = pokemonCard(pokemon);
-        grid.appendChild(card);
+        grid.appendChild(pokemonCard(pokemon));
       });
 
     if (!results.length) {
