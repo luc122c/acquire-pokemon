@@ -1,7 +1,7 @@
 import { resolveURL } from "ufo";
 import { $fetch } from "ofetch";
 import type { Generation, PokemonSpecies } from "pokenode-ts";
-import { localStorage } from "./cache";
+import { localStorage } from "./utils/cache";
 
 const API_BASE_URL = "https://pokeapi.co/api/v2/";
 

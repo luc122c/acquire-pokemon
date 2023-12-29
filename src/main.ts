@@ -7,7 +7,7 @@ import {
   getPokemonByName,
   filterPokemonSpecies,
 } from "./fetch";
-import { pokemonCard } from "./rendering";
+import { pokemonCard } from "./utils/rendering";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 app.innerText = "Loading...";
@@ -51,9 +51,10 @@ fetchPokemonSpeciesList(1)
 function setupClearFormButton() {
   const clearButton =
     document.querySelector<HTMLButtonElement>("#clear-search")!;
+  const url = new URL(window.location.href);
+  url.searchParams.delete("search");
+
   clearButton.addEventListener("click", () => {
-    const url = new URL(window.location.href);
-    url.searchParams.delete("search");
     window.location.href = url.href;
   });
 }
