@@ -16,8 +16,11 @@ export const pokemonCard = (pokemon: PokemonSpecies) => {
   header.appendChild(id);
 
   const description = document.createElement("p");
-  // TODO: Find the english text
-  description.textContent = pokemon.flavor_text_entries[0].flavor_text;
+  // Find the english text if it exists, otherwise use the first one.
+  description.textContent =
+    pokemon.flavor_text_entries.find(
+      (flavour) => flavour.language.name === "en"
+    )?.flavor_text || pokemon.flavor_text_entries[0].flavor_text;
 
   card.appendChild(header);
   card.appendChild(description);
