@@ -2,6 +2,7 @@ import "the-new-css-reset/css/reset.css";
 import "./style.css";
 
 import { PromisePool } from "@supercharge/promise-pool";
+import { $URL, withQuery } from "ufo";
 import {
   fetchPokemonSpeciesList,
   getPokemonByName,
@@ -43,6 +44,26 @@ fetchPokemonSpeciesList(1)
       grid.appendChild(noResults);
     }
 
+    grid.addEventListener("click", (event) => {
+      if (!(event.target instanceof HTMLElement)) return;
+      // If click comes from a 'pokemon-card' div or within one
+      if (
+        event.target.classList.contains("pokemon-card") ||
+        event.target.closest(".pokemon-card")
+      ) {
+        // get the pokemon card element
+        const card = event.target.classList.contains("pokemon-card")
+          ? event.target
+          : event.target.closest(".pokemon-card")!;
+
+        const name = card.getAttribute("data-species");
+        if (!name) return;
+
+        // redirect to the pokemon details page
+        window.location.href = withQuery("/inspect/", { name });
+      }
+    });
+
     // Clear the div
     app.innerHTML = "";
     app.appendChild(grid);
@@ -51,7 +72,7 @@ fetchPokemonSpeciesList(1)
 function setupClearFormButton() {
   const clearButton =
     document.querySelector<HTMLButtonElement>("#clear-search")!;
-  const url = new URL(window.location.href);
+  const url = new $URL(window.location.href);
   url.searchParams.delete("search");
 
   clearButton.addEventListener("click", () => {

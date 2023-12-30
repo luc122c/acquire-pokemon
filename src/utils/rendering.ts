@@ -4,6 +4,7 @@ export const pokemonCard = (pokemon: PokemonSpecies) => {
   const card = document.createElement("div");
   card.classList.add("pokemon-card");
   card.tabIndex = 1;
+  card.dataset.species = pokemon.name;
 
   const header = document.createElement("div");
   header.classList.add("pokemon-card-header");

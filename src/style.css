@@ -61,6 +61,7 @@ h1 {
 .pokemon-card {
   outline: solid 1px white;
   padding: 0.5rem;
+  cursor: pointer;
 }
 .pokemon-card:hover,
 .pokemon-card:focus {
