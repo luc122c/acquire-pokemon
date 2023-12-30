@@ -44,24 +44,9 @@ fetchPokemonSpeciesList(1)
       grid.appendChild(noResults);
     }
 
-    grid.addEventListener("click", (event) => {
-      if (!(event.target instanceof HTMLElement)) return;
-      // If click comes from a 'pokemon-card' div or within one
-      if (
-        event.target.classList.contains("pokemon-card") ||
-        event.target.closest(".pokemon-card")
-      ) {
-        // get the pokemon card element
-        const card = event.target.classList.contains("pokemon-card")
-          ? event.target
-          : event.target.closest(".pokemon-card")!;
-
-        const name = card.getAttribute("data-species");
-        if (!name) return;
-
-        // redirect to the pokemon details page
-        window.location.href = withQuery("/inspect/", { name });
-      }
+    grid.addEventListener("click", maybeInspectPokemon);
+    grid.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") maybeInspectPokemon(event);
     });
 
     // Clear the div
@@ -78,4 +63,24 @@ function setupClearFormButton() {
   clearButton.addEventListener("click", () => {
     window.location.href = url.href;
   });
+}
+
+function maybeInspectPokemon({ target }: Event) {
+  if (!(target instanceof HTMLElement)) return;
+  // If click comes from a 'pokemon-card' div or within one
+  if (
+    target.classList.contains("pokemon-card") ||
+    target.closest(".pokemon-card")
+  ) {
+    // get the pokemon card element
+    const card = target.classList.contains("pokemon-card")
+      ? target
+      : target.closest(".pokemon-card")!;
+
+    const name = card.getAttribute("data-species");
+    if (!name) return;
+
+    // redirect to the pokemon details page
+    window.location.href = withQuery("/inspect/", { name });
+  }
 }
