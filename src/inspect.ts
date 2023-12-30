@@ -27,6 +27,6 @@ getPokemonByName(name)
     app.innerText = "";
     app.appendChild(singlePokemon(pokemon));
   })
-  .catch((error) => {
+  .catch(() => {
     app.innerText = "Error loading pokemon: " + name;
   });
