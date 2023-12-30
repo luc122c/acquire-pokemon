@@ -8,7 +8,7 @@ The major components are listed below:
 
 - Vite
 - TypeScript
-- [oFetch](https://unjs.io/packages/ofetch) - Typed fetch with built-in JSON decoding
+- [ofetch](https://unjs.io/packages/ofetch) - Typed fetch with built-in JSON decoding
 - [unstorage](https://unjs.io/packages/unstorage) - Typed access to local storage API
 - [ufo](https://unjs.io/packages/ufo) - Utilities for parsing and normalising URLs.
 - [Promise Pool](https://superchargejs.com/docs/3.x/promise-pool) - Used to limit concurrent requests to the API.
@@ -25,3 +25,17 @@ The major components are listed below:
 The two views have their own entrypoint in `src`: `main.ts` and `inspect.ts`. Shared functionality can be found in the `utils` folder.
 
 The main page calls the API to check for the list of pokemon. While this could be cached locally, it is a small call and it appears to already get cached elsewhere (either the browser or Cloudflare, I can't tell). Once the list has been retrived, each Pokemon resource is retrived. The cache is checked first and if there is no hit, the API is called. This activity is throttled using a promise pool, mainly for the initial load where 151 external API requests are required. If there is a search term, the result is filtered. The list is sorted by the pokedex ID.
+
+## Development
+
+There are two ways to get a development server up and running. You can run it locally with the following commands:
+
+```sh
+# Install dependencies
+pnpm install
+
+# Run the dev server
+pnpm run dev
+```
+
+A [devcontainer.json](https://code.visualstudio.com/docs/devcontainers/containers) has also been provided. If you are using VSCode, use the "Rebuild and Reopen in Container" command. You could also use [GitHub Codespaces](https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers).
