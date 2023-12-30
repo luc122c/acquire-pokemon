@@ -27,6 +27,17 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
+button {
+  border-radius: 0.5rem;
+  background-color: #333;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: 0.25rem;
+}
+button:focus {
+  outline: solid 1px #646cff;
+}
+
 #search {
   display: flex;
 }
@@ -40,16 +51,6 @@ h1 {
 }
 #search > input:focus {
   background-color: #444;
-}
-#search > button {
-  border-radius: 0.5rem;
-  background-color: #333;
-  cursor: pointer;
-  padding: 0.5rem;
-  margin-left: 0.25rem;
-}
-#search > button:focus {
-  outline: solid 1px #646cff;
 }
 
 .card-grid {
