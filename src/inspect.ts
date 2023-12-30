@@ -20,13 +20,12 @@ if (!name) {
 
 // Validate the name
 
-import { getPokemonByName } from "./fetch";
+import { getPokemonByName } from "./utils/fetch";
+import { singlePokemon } from "./utils/rendering";
 getPokemonByName(name)
   .then((pokemon) => {
-    const pre = document.createElement("pre");
-    pre.innerText = JSON.stringify(Object.keys(pokemon), null, 2);
     app.innerText = "";
-    app.appendChild(pre);
+    app.appendChild(singlePokemon(pokemon));
   })
   .catch((error) => {
     app.innerText = "Error loading pokemon: " + name;

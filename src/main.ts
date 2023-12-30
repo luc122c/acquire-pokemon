@@ -7,7 +7,7 @@ import {
   fetchPokemonSpeciesList,
   getPokemonByName,
   filterPokemonSpecies,
-} from "./fetch";
+} from "./utils/fetch";
 import { pokemonCard } from "./utils/rendering";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;

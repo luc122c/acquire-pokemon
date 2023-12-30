@@ -11,16 +11,47 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --pokemon-color: #444; /* default color */
+}
+
+.pokemon-color-red {
+  --pokemon-color: #9b3636;
+}
+.pokemon-color-green {
+  --pokemon-color: #3c7d3e;
+}
+.pokemon-color-blue {
+  --pokemon-color: #3c4094;
+}
+.pokemon-color-yellow {
+  --pokemon-color: #997d49;
+}
+.pokemon-color-brown {
+  --pokemon-color: #503a27;
+}
+.pokemon-color-purple {
+  --pokemon-color: #6b5aa6;
+}
+.pokemon-color-pink {
+  --pokemon-color: #9b5b8f;
+}
+.pokemon-color-white {
+  --pokemon-color: #7e7e7e;
+}
+.pokemon-color-gray {
+  --pokemon-color: #474747;
 }
 
 body {
   min-width: 320px;
-  min-height: 100vh;
 }
 
-header {
+header,
+#app {
   margin: 1rem;
 }
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -38,6 +69,7 @@ button:focus {
   outline: solid 1px #646cff;
 }
 
+/* Index page */
 #search {
   display: flex;
 }
@@ -54,19 +86,26 @@ button:focus {
 }
 
 .card-grid {
-  margin: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 2rem;
 }
 .pokemon-card {
+  display: flex;
   outline: solid 1px white;
-  padding: 0.5rem;
   cursor: pointer;
 }
 .pokemon-card:hover,
 .pokemon-card:focus {
   outline: solid 1px #646cff;
+}
+
+.pokemon-card-colour {
+  width: 5%;
+  background-color: var(--pokemon-color);
+}
+.pokemon-card-content {
+  padding: 0.5rem;
 }
 
 .pokemon-card-header {
@@ -80,4 +119,48 @@ button:focus {
   margin: 0;
   font-size: 1.5em;
   font-weight: 500;
+}
+
+/* Insepct Page */
+.pokemon-single {
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-single-header {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--pokemon-color);
+  border-radius: 0.5rem;
+  margin: 0 auto 1rem;
+}
+
+.pokemon-single-title {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.pokemon-single-id {
+  font-size: 1.25em;
+  font-weight: 500;
+  margin: 0;
+}
+
+.pokemon-single-badges {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 3rem;
+  gap: 3rem;
+}
+.pokemon-single-badges > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  margin: 0 0.25rem;
+  border-radius: 100%;
+  background-color: #333;
+  box-shadow: 0px 0px 20px 10px #48abe0;
 }
