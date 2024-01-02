@@ -58,22 +58,47 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
-button {
+.spacer {
+  flex-grow: 1;
+}
+
+button,
+label[role="button"] {
   border-radius: 0.5rem;
   background-color: #333;
   cursor: pointer;
   padding: 0.5rem;
   margin-left: 0.25rem;
 }
-button:focus {
+button:focus,
+label[role="button"]:focus {
+  outline: solid 1px #646cff;
+}
+
+label:has(input:checked) {
+  background-color: #444;
   outline: solid 1px #646cff;
 }
 
 /* Index page */
-#search {
+form,
+fieldset {
   display: flex;
+  align-items: center;
 }
-#search > input {
+form {
+  margin-bottom: 1rem;
+}
+
+fieldset {
+  width: 100%;
+}
+
+form input {
+  display: block;
+}
+
+form > input {
   width: 100%;
   padding: 0.5rem;
   border: none;
@@ -81,8 +106,17 @@ button:focus {
   background-color: #333;
   outline: none;
 }
-#search > input:focus {
+form > input:focus {
   background-color: #444;
+}
+
+label:has(input[type="radio"]) {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+label:has(input[type="radio"]:focus) {
+  outline: solid 1px #646cff;
 }
 
 .card-grid {

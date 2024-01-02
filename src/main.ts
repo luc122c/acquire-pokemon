@@ -1,11 +1,13 @@
 import "the-new-css-reset/css/reset.css";
 import "./style.css";
+import "./utils/forms";
 
 import { PromisePool } from "@supercharge/promise-pool";
-import { $URL, withQuery } from "ufo";
+import { withQuery } from "ufo";
 import {
   fetchPokemonSpeciesList,
   getPokemonByName,
+  searchPokemonSpecies,
   filterPokemonSpecies,
 } from "./utils/fetch";
 import { pokemonCard } from "./utils/rendering";
@@ -13,10 +15,7 @@ import { pokemonCard } from "./utils/rendering";
 const app = document.querySelector<HTMLDivElement>("#app")!;
 app.innerText = "Loading...";
 
-setupClearFormButton();
-
 const params = new URLSearchParams(window.location.search);
-const search = params.get("search");
 // Get the initial list of pokemon species
 fetchPokemonSpeciesList(1)
   .then((pokemon_species) =>
@@ -25,7 +24,14 @@ fetchPokemonSpeciesList(1)
       .for(pokemon_species)
       .process((species) => getPokemonByName(species.name))
   )
-  .then(({ results }) => filterPokemonSpecies(results, search))
+  .then(({ results }) => {
+    const search = params.get("search");
+    return searchPokemonSpecies(results, search);
+  })
+  .then((results) => {
+    const filter = params.getAll("filter");
+    return filterPokemonSpecies(results, filter);
+  })
   .then((results) => {
     const grid = document.createElement("div");
     grid.classList.add("card-grid");
@@ -53,17 +59,6 @@ fetchPokemonSpeciesList(1)
     app.innerHTML = "";
     app.appendChild(grid);
   });
-
-function setupClearFormButton() {
-  const clearButton =
-    document.querySelector<HTMLButtonElement>("#clear-search")!;
-  const url = new $URL(window.location.href);
-  url.searchParams.delete("search");
-
-  clearButton.addEventListener("click", () => {
-    window.location.href = url.href;
-  });
-}
 
 function maybeInspectPokemon({ target }: Event) {
   if (!(target instanceof HTMLElement)) return;

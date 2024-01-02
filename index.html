@@ -24,6 +24,27 @@
         <button tabindex="1" type="submit">Search</button>
         <button tabindex="1" id="clear-search">Clear</button>
       </form>
+
+      <form id="filters" method="GET">
+        <fieldset>
+          <label role="button" tabindex="1">
+            <input type="checkbox" name="filter" value="is_baby" />
+            Baby
+          </label>
+          <label role="button" tabindex="1">
+            <input type="checkbox" name="filter" value="is_legendary" />
+            Legendary
+          </label>
+          <label role="button" tabindex="1">
+            <input type="checkbox" name="filter" value="is_mythical" />
+            Mythical
+          </label>
+
+          <div class="spacer"></div>
+          <button tabindex="1" type="submit">Filter</button>
+          <button tabindex="1" id="clear-filters">Clear</button>
+        </fieldset>
+      </form>
     </header>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
