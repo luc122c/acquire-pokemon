@@ -42,13 +42,25 @@ export const pokemonCard = (pokemon: PokemonSpecies) => {
 };
 
 export const singlePokemon = (species: PokemonSpecies, pokemon: Pokemon) => {
-  console.log(species);
+  console.log(species, pokemon);
   const single = document.createElement("div");
   single.classList.add("pokemon-single");
   single.classList.add(`pokemon-color-${species.color.name}`);
 
   const header = document.createElement("div");
   header.classList.add("pokemon-single-header");
+
+  const sprite =
+    pokemon.sprites.other?.["official-artwork"].front_default ??
+    pokemon.sprites.front_default;
+  if (sprite) {
+    const image = document.createElement("img");
+    image.classList.add("pokemon-single-image");
+    image.src = sprite;
+    image.alt = species.name;
+    image.width = image.height = 100;
+    header.appendChild(image);
+  }
 
   const title = document.createElement("h2");
   title.classList.add("pokemon-single-title");
@@ -75,8 +87,7 @@ export const singlePokemon = (species: PokemonSpecies, pokemon: Pokemon) => {
     legendary.textContent = "Legendary";
     badges.appendChild(legendary);
   }
-
-  single.appendChild(badges);
+  if (badges.children.length) single.appendChild(badges);
 
   const description = document.createElement("p");
   description.classList.add("pokemon-single-description");

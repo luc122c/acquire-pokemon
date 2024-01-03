@@ -161,6 +161,13 @@ label:has(input[type="radio"]:focus) {
   flex-direction: column;
 }
 
+.pokemon-single-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
 .pokemon-single-header {
   display: flex;
   flex-direction: column;
