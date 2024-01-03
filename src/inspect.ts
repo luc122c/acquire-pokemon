@@ -18,17 +18,23 @@ if (!name) {
   throw new Error("No name provided");
 }
 
-// Validate the name
+// TODO: Validate the name
 
-import { getPokemonSpeciesByName } from "./utils/fetch";
+import {
+  getPokemonSpeciesByName,
+  getDefaultVarietyId,
+  getPokemonById,
+} from "./utils/fetch";
 import { singlePokemon } from "./utils/rendering";
 getPokemonSpeciesByName(name)
-  .then((pokemon) => {
-    // TODO: Get the default for the sprite etc.
-    console.log(pokemon.varieties.find((variety) => variety.is_default));
-
+  .then(async (species) => {
+    const id = getDefaultVarietyId(species);
+    const pokemon = await getPokemonById(id);
+    return { species, pokemon };
+  })
+  .then(({ species, pokemon }) => {
     app.innerText = "";
-    app.appendChild(singlePokemon(pokemon));
+    app.appendChild(singlePokemon(species, pokemon));
   })
   .catch(() => {
     app.innerText = "Error loading pokemon: " + name;
