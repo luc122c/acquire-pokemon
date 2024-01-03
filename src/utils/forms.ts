@@ -21,15 +21,26 @@ function setupClearFiltersButton() {
 }
 
 function setupFilterForm() {
-  const filters = document.querySelectorAll<HTMLLabelElement>(
+  const buttons = document.querySelectorAll<HTMLLabelElement>(
     "#filters label[role='button']"
   )!;
-  filters.forEach((label) => {
+  // Enter key toggles checkboxes
+  // Default behaviour is for the label click to toggle the checkbox
+  buttons.forEach((label) => {
     label.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         const target = event.target as HTMLLabelElement;
         const input = target.querySelector("input")!;
         input.checked = !input.checked;
+      }
+    });
+    // Toggle existing filters
+    const query = new URLSearchParams(window.location.search).getAll("filter");
+    const inputs =
+      document.querySelectorAll<HTMLInputElement>("#filters input")!;
+    inputs.forEach((input) => {
+      if (query.includes(input.value)) {
+        input.checked = true;
       }
     });
   });
