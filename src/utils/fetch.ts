@@ -31,7 +31,7 @@ export const fetchPokemonSpecies = (
  * Fetch a pokemon species by name or id.
  * Checks the cache first, and if it's not there, fetches it from the API.
  **/
-export const getPokemonByName = async (name: PokemonSpecies["name"]) => {
+export const getPokemonSpeciesByName = async (name: PokemonSpecies["name"]) => {
   const pokemon = await localStorage.getItem<PokemonSpecies>(name);
   if (pokemon) return pokemon;
   else {

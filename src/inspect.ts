@@ -20,10 +20,13 @@ if (!name) {
 
 // Validate the name
 
-import { getPokemonByName } from "./utils/fetch";
+import { getPokemonSpeciesByName } from "./utils/fetch";
 import { singlePokemon } from "./utils/rendering";
-getPokemonByName(name)
+getPokemonSpeciesByName(name)
   .then((pokemon) => {
+    // TODO: Get the default for the sprite etc.
+    console.log(pokemon.varieties.find((variety) => variety.is_default));
+
     app.innerText = "";
     app.appendChild(singlePokemon(pokemon));
   })

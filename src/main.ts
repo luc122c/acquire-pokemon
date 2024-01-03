@@ -6,7 +6,7 @@ import { PromisePool } from "@supercharge/promise-pool";
 import { withQuery } from "ufo";
 import {
   fetchPokemonSpeciesList,
-  getPokemonByName,
+  getPokemonSpeciesByName,
   searchPokemonSpecies,
   filterPokemonSpecies,
 } from "./utils/fetch";
@@ -22,7 +22,7 @@ fetchPokemonSpeciesList(1)
     // Use a promise pool to limit the number of concurrent requests
     PromisePool.withConcurrency(10)
       .for(pokemon_species)
-      .process((species) => getPokemonByName(species.name))
+      .process((species) => getPokemonSpeciesByName(species.name))
   )
   .then(({ results }) => {
     const search = params.get("search");
