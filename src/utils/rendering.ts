@@ -27,13 +27,8 @@ export const pokemonCard = (pokemon: PokemonSpecies) => {
   id.textContent = `#${pokemon.id.toString().padStart(3, "0")}`;
   header.appendChild(id);
 
-  const description = document.createElement("p");
+  const description = createDescription(pokemon.flavor_text_entries);
   description.classList.add("pokemon-card-description");
-  // Find the english text if it exists, otherwise use the first one.
-  description.textContent =
-    pokemon.flavor_text_entries.find(
-      (flavour) => flavour.language.name === "en"
-    )?.flavor_text || pokemon.flavor_text_entries[0].flavor_text;
 
   content.appendChild(header);
   content.appendChild(description);
@@ -73,30 +68,47 @@ export const singlePokemon = (species: PokemonSpecies, pokemon: Pokemon) => {
   header.appendChild(id);
   single.appendChild(header);
 
+  const badges = createBadges(species);
+  if (badges.children.length) single.appendChild(badges);
+
+  const descriptionHeading = document.createElement("h3");
+  descriptionHeading.textContent = "Description";
+  single.appendChild(descriptionHeading);
+  const description = createDescription(species.flavor_text_entries);
+  description.classList.add("pokemon-single-description");
+  single.appendChild(description);
+  return single;
+};
+
+function createBadges(pokemon: PokemonSpecies) {
   const badges = document.createElement("div");
   badges.classList.add("pokemon-single-badges");
-  if (species.is_mythical) {
+  if (pokemon.is_mythical) {
     const mythical = document.createElement("span");
     mythical.classList.add("pokemon-single-mythical");
     mythical.textContent = "Mythical";
     badges.appendChild(mythical);
   }
-  if (species.is_legendary) {
+  if (pokemon.is_legendary) {
     const legendary = document.createElement("span");
     legendary.classList.add("pokemon-single-legendary");
     legendary.textContent = "Legendary";
     badges.appendChild(legendary);
   }
-  if (badges.children.length) single.appendChild(badges);
+  return badges;
+}
 
+function createDescription(entries: PokemonSpecies["flavor_text_entries"]) {
   const description = document.createElement("p");
-  description.classList.add("pokemon-single-description");
   // Find the english text if it exists, otherwise use the first one.
-  description.textContent =
-    species.flavor_text_entries.find(
-      (flavour) => flavour.language.name === "en"
-    )?.flavor_text || species.flavor_text_entries[0].flavor_text;
-  single.appendChild(description);
-
-  return single;
-};
+  const text =
+    entries.find((flavour) => flavour.language.name === "en")?.flavor_text ||
+    entries[0].flavor_text;
+  /**
+   * Remove control characters from the text.
+   * @link https://stackoverflow.com/a/51602415/2527692
+   */
+  description.textContent = text.replace(/[\u0000-\u001F\u007F-\u009F]/g, " ");
+  console.log(description.textContent);
+  return description;
+}

@@ -49,13 +49,22 @@ body {
 
 header,
 #app {
-  margin: 1rem;
+  padding: 1rem;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
   margin-bottom: 0.5rem;
+  text-wrap: wrap;
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 1.1;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  text-decoration: underline;
 }
 
 .spacer {
