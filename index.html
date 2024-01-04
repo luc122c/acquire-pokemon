@@ -15,33 +15,28 @@
       </noscript>
 
       <form id="search" method="GET">
-        <input
-          type="text"
-          name="search"
-          placeholder="Search for a Pokémon"
-          tabindex="1"
-        />
-        <button tabindex="1" type="submit">Search</button>
-        <button tabindex="1" id="clear-search">Clear</button>
+        <input type="text" name="search" placeholder="Search for a Pokémon" />
+        <button type="submit">Search</button>
+        <button id="clear-search">Clear</button>
       </form>
 
       <form id="filters" method="GET">
         <fieldset>
-          <label tabindex="1">
+          <label>
             <input type="checkbox" name="filter" value="is_baby" />
             Baby
           </label>
-          <label tabindex="1">
+          <label>
             <input type="checkbox" name="filter" value="is_legendary" />
             Legendary
           </label>
-          <label tabindex="1">
+          <label>
             <input type="checkbox" name="filter" value="is_mythical" />
             Mythical
           </label>
           <div class="spacer"></div>
-          <button tabindex="1" type="submit">Filter</button>
-          <button tabindex="1" id="clear-filters">Clear</button>
+          <button type="submit">Filter</button>
+          <button id="clear-filters">Clear</button>
         </fieldset>
       </form>
     </header>

@@ -3,7 +3,6 @@ import type { PokemonSpecies, Pokemon } from "pokenode-ts";
 export const pokemonCard = (pokemon: PokemonSpecies) => {
   const card = document.createElement("div");
   card.classList.add("pokemon-card");
-  card.tabIndex = 1;
   card.dataset.species = pokemon.name;
 
   const colour = document.createElement("span");
