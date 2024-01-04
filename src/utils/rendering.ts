@@ -77,6 +77,33 @@ export const singlePokemon = (species: PokemonSpecies, pokemon: Pokemon) => {
   const description = createDescription(species.flavor_text_entries);
   description.classList.add("pokemon-single-description");
   single.appendChild(description);
+
+  const stats = createStatsList(pokemon.stats);
+  if (stats.children.length) {
+    const statsHeading = document.createElement("h3");
+    statsHeading.textContent = "Stats";
+    single.appendChild(statsHeading);
+    single.appendChild(stats);
+  }
+
+  if (pokemon.types.length) {
+    const typesHeading = document.createElement("h3");
+    typesHeading.textContent = "Types";
+    single.appendChild(typesHeading);
+
+    const types = createTypesList(pokemon.types);
+    single.appendChild(types);
+  }
+
+  if (pokemon.moves.length) {
+    const movesHeading = document.createElement("h3");
+    single.appendChild(movesHeading);
+    movesHeading.textContent = "Moves";
+
+    const moves = createMovesList(pokemon.moves);
+    single.appendChild(moves);
+  }
+
   return single;
 };
 
@@ -98,6 +125,51 @@ function createBadges(pokemon: PokemonSpecies) {
   return badges;
 }
 
+function createMovesList(moves: Pokemon["moves"]) {
+  const list = document.createElement("ul");
+  list.classList.add("pokemon-single-moves");
+  moves.forEach((move) => {
+    const item = document.createElement("li");
+    item.classList.add("pokemon-single-move");
+    item.textContent = move.move.name;
+    list.appendChild(item);
+  });
+  return list;
+}
+
+function createTypesList(types: Pokemon["types"]) {
+  const list = document.createElement("ul");
+  list.classList.add("pokemon-single-types");
+  types.forEach((type) => {
+    const item = document.createElement("li");
+    item.classList.add("pokemon-single-type");
+    item.textContent = type.type.name;
+    list.appendChild(item);
+  });
+  return list;
+}
+
+function createStatsList(stats: Pokemon["stats"]) {
+  const list = document.createElement("div");
+  list.classList.add("pokemon-single-stats");
+  stats.forEach((stat) => {
+    const div = document.createElement("div");
+    div.classList.add("pokemon-single-stat");
+
+    const label = document.createElement("span");
+    label.classList.add("pokemon-single-stat-label");
+    label.textContent = stat.stat.name;
+    div.appendChild(label);
+
+    const value = document.createElement("span");
+    value.classList.add("pokemon-single-stat-value");
+    value.textContent = stat.base_stat.toString();
+    div.appendChild(value);
+    list.appendChild(div);
+  });
+  return list;
+}
+
 function createDescription(entries: PokemonSpecies["flavor_text_entries"]) {
   const description = document.createElement("p");
   // Find the english text if it exists, otherwise use the first one.
@@ -109,6 +181,5 @@ function createDescription(entries: PokemonSpecies["flavor_text_entries"]) {
    * @link https://stackoverflow.com/a/51602415/2527692
    */
   description.textContent = text.replace(/[\u0000-\u001F\u007F-\u009F]/g, " ");
-  console.log(description.textContent);
   return description;
 }
