@@ -8,7 +8,7 @@ import {
   storePokemonVariety,
 } from "./cache";
 
-const API_BASE_URL = "https://pokeapi.co/api/v2/";
+const API_BASE_URL = process.env.API_BASE_URL ?? "https://pokeapi.co/api/v2";
 
 /**
  * Fetch a list of all pokemon species in a generation.
